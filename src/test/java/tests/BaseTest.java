@@ -55,7 +55,7 @@ public class BaseTest {
             case "STG":{
                 driver.get("https://www.booking.com/a");
             }break;
-            default: throw new Exception("ENV: " +env+" not supported!");
+            default: throw new Exception("ENV: " +env+ " not supported!");
         }
     }
 }
