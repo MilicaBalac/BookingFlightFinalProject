@@ -53,15 +53,39 @@ public class BookingSteps extends BaseTest {
         flightsPage.openFlightPage();
     }
 
+    @And("I select flight class {string}")
+    public void iSelectFlightClass(String classType) {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.selectFlightClass(classType);
+    }
+
     @And("I select number of adults {string}")
     public void iSelectNumberOfAdults(String num) throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
         flightsPage.addAdults(num);
     }
 
-//    @And("I select flight class {string}")
-//    public void iSelectFlightClass(String classType) throws InterruptedException {
-//        FlightsPage flightsPage = new FlightsPage(driver);
-//        flightsPage.selectFlightClass(classType);
-//    }
+    @And("I add destination {string} {string}")
+    public void iAddDestination(String city, String place) throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.addLocation(city, place);
+    }
+
+    @And("I add departure date and return date {string}  {string}")
+    public void iAddDepartureDateAndReturnDate(String departDate, String returnDate) throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.selectDepartAndReturnDate(departDate, returnDate);
+    }
+
+    @Then("I check direct flights only")
+    public void iCheckDirectFlightsOnly() throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.checkDirectFlights();
+    }
+
+    @And("I click search")
+    public void iClickSearch() throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.clickSearch();
+    }
 }

@@ -2,15 +2,14 @@ Feature: Booking
 
 #  Scenario Outline: Book a Flight row: "<row>"
   Scenario: Book a Flight
-#    Given I load test data from "Booking" "BookingSheet" "<row>"
     Given I navigate to Booking
     Then I navigate to flights page
-#    And I select flight class "Business"
-    And I select number of adults "2"
-#    And I add destination
-#    Then I add departure and return date
-#    Then I check direct flights only
-#    And I click search
+    And I select flight class "PREMIUM_ECONOMY"
+    And I select number of adults "4"
+    And I add destination "Barcelona" "Spain"
+    And I add departure date and return date "2022-02-27"  "2022-03-17"
+    Then I check direct flights only
+    And I click search
 
 #   Examples:
 #      | row |

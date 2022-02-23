@@ -23,46 +23,81 @@ public class FlightsPage extends BasePage {
     @FindBy(xpath = "//a[@data-decider-header='flights']")
     WebElement flights;
 
-    @FindBy (xpath = "//div[@class='css-1ntod47']")
-    WebElement flightClassEl;
-    @FindBy (xpath = "//select[@class='css-1k0jlfl']")
-    WebElement flightClassElSelect;
+    @FindBy(css = "select.css-1k0jlfl")
+    WebElement flightClass;
 
-    @FindBy (xpath = "//div[contains(text(), 'adult')]")
+    @FindBy(xpath = "//div[contains(text(), 'adult')]")
     WebElement adultEl;
 
-    @FindBy (css = ".css-153jucu")
+    @FindBy(css = ".css-153jucu")
     List<WebElement> incAdultNum;
 
-    @FindBy (css = ".css-1od6d6y")
-    List<WebElement> decAdultNum;
-
-    @FindBy (css = ".css-1bal7l4 .css-ya5gr9")
+    @FindBy(css = ".css-1bal7l4 .css-ya5gr9")
     WebElement addAdultNumBtn;
 
+    @FindBy(css = "[data-testid='searchbox_destination_input']")
+    WebElement whereToDestination;
+
+    @FindBy(css = "[data-testid='searchbox_destination']")
+    WebElement whereTo;
+
+    @FindBy(xpath = "//input[@placeholder='Depart']")
+    WebElement departBtn;
+
+    @FindBy(xpath = "//input[@placeholder='Return']")
+    WebElement returnBtn;
+
+    @FindBy(css = ".InputCheckbox-module__field___1mRcZ")
+    WebElement directFlights;
+
+    @FindBy(css = ".css-ya5gr9")
+    WebElement searchBtn;
 
     public void openFlightPage() throws InterruptedException {
         clickElement(flights);
     }
 
-    public void selectFlightClass(String classType) throws InterruptedException {
-        clickElement(flightClassEl);
-        selectByVisibleText(flightClassElSelect, classType);
+
+    public void selectFlightClass(String classType) {
+        selectByValue(flightClass, classType);
     }
 
-       public void addAdults(String num) throws InterruptedException {
+
+    public void addAdults(String num) throws InterruptedException {
         clickElement(adultEl);
         Thread.sleep(1000);
 
-        if(num.equals("1")){
+        if (num.equals("1")) {
             //do nothing
-        } else if(Integer.parseInt(num)< 1){
-            clickElement(decAdultNum.get(0));
-        } else {
-            for(int i = 0; i <= Integer.parseInt(num); i++) {
+        } else if (Integer.parseInt(num) > 1) {
+            for (int i = 2; i <= Integer.parseInt(num); i++) {
                 clickElement(incAdultNum.get(0));
             }
         }
         clickElement(addAdultNumBtn);
     }
+
+    public void addLocation(String city, String place) throws InterruptedException {
+        clickElement(whereTo);
+        inputElement(whereToDestination, city);
+        Thread.sleep(wait);
+        clickElement(driver.findElement(By.xpath("//div[contains(text(),'" + place + "')]")));
+    }
+
+    public void selectDepartAndReturnDate(String departDate, String returnDate) throws InterruptedException {
+        clickElement(departBtn);
+        clickElement(driver.findElement(By.xpath("//span[@data-date-cell='" + departDate + "']")));
+        clickElement(returnBtn);
+        clickElement(driver.findElement(By.xpath("//span[@data-date-cell='" + returnDate + "']")));
+    }
+
+    public void checkDirectFlights() throws InterruptedException {
+        clickElement(directFlights);
+    }
+
+    public void clickSearch() throws InterruptedException {
+        clickElement(searchBtn);
+    }
+
+
 }
