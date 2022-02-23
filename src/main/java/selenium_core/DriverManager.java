@@ -6,7 +6,7 @@ public abstract class DriverManager {
 
     WebDriver driver;
 
-    public abstract void createWebDriver(String version);
+    public abstract void createWebDriver();
 
 
     public void quitWebDriver(){
@@ -16,9 +16,9 @@ public abstract class DriverManager {
         }
     }
 
-    public WebDriver getWebDriver(String version){
+    public WebDriver getWebDriver(){
         if(null == driver) {
-            createWebDriver(version);
+            createWebDriver();
         }
         return driver;
     }

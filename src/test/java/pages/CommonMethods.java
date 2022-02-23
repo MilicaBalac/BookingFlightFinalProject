@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CommonMethods {
 
     WebDriver driver;
-    int wait = 30;
+    int wait = 10;
     public CommonMethods(WebDriver driver) {
         this.driver = driver;
     }
@@ -73,6 +73,20 @@ public class CommonMethods {
         } catch (StaleElementReferenceException e){
             Select select = new Select(element);
             select.selectByValue(value);
+        }
+    }
+
+    public void selectByVisibleText(WebElement element, String visibleText) {
+        WebDriverWait wdWait = new WebDriverWait(driver, wait);
+        wdWait.until(ExpectedConditions.visibilityOf(element));
+        wdWait.until(ExpectedConditions.elementToBeClickable(element));
+
+        try {
+            Select select = new Select(element);
+            select.selectByVisibleText(visibleText);
+        } catch (StaleElementReferenceException e){
+            Select select = new Select(element);
+            select.selectByValue(visibleText);
         }
     }
 

@@ -21,9 +21,10 @@ public class BaseTest {
     public WebDriver driver;
     public DriverManager driverManager;
 
-    public void setUPTest(String browser, String version, long waitTime) throws Exception {
+    public void setUPTest(String browser, long waitTime) throws Exception {
+
         driverManager = DriverManagerFactory.getDriverManager(browser);
-        driver = driverManager.getWebDriver(version);
+        driver = driverManager.getWebDriver();
         driver.manage().timeouts().implicitlyWait(waitTime, TimeUnit.SECONDS);
     }
 
@@ -55,7 +56,7 @@ public class BaseTest {
             case "STG":{
                 driver.get("https://www.booking.com/a");
             }break;
-            default: throw new Exception("ENV: " +env+" not supported!");
+            default: throw new Exception("ENV: " +env+ " not supported!");
         }
     }
 }
