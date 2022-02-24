@@ -53,6 +53,9 @@ public class FlightsPage extends BasePage {
     @FindBy(css = ".css-ya5gr9")
     WebElement searchBtn;
 
+    @FindBy(css = "[data-testid='searchresults_card']")
+    List <WebElement> flightsCard;
+
     public void openFlightPage() throws InterruptedException {
         clickElement(flights);
     }
@@ -97,7 +100,15 @@ public class FlightsPage extends BasePage {
 
     public void clickSearch() throws InterruptedException {
         clickElement(searchBtn);
+        Thread.sleep(3000);
     }
 
+    public void checkIfflightsExists() throws InterruptedException {
+
+        if(!isElementPresent(flightsCard)) {
+            checkDirectFlights();
+        }
+    }
+  //  clickElement(driver.findElement(By.xpath("//div[text() ='" + stops + "']")));
 
 }
