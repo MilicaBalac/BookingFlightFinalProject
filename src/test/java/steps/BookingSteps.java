@@ -96,10 +96,35 @@ public class BookingSteps extends BaseTest {
         flightsPage.chooseFlightTime(time);
     }
 
-//    @And("I check if flights exists")
-//    public void iCheckIfFlightsExists() throws InterruptedException {
-//        FlightsPage flightsPage = new FlightsPage(driver);
-//        flightsPage.checkIfflightsExists();
-//
-//    }
+    @Then("I choose presentation {string}")
+    public void iChoosePresentation(String presentation) throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.choosePresentation(presentation);
+    }
+
+    @Then("I click to see flight {string}")
+    public void iClickToSeeFlight(String num) throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.clickToSeeFlightDetails(num);
+    }
+
+
+    @Then("I verify visibility of flights details")
+    public void iVerifyVisibilityOfFlightsDetails() {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.verifyVisibilityOfDetails();
+    }
+
+    @Then("I verify prices {string}")
+    public void iVerifyPrices(String num) {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.verifyPrices(num);
+
+    }
+
+    @Then("I select flight")
+    public void iSelectFlight() throws InterruptedException {
+        FlightsPage flightsPage = new FlightsPage(driver);
+        flightsPage.selectFlight();
+    }
 }
