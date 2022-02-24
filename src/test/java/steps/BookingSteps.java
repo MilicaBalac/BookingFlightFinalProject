@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import org.testng.Reporter;
 import pages.FlightsPage;
 import pages.TicketTypePage;
+import pages.WhosFlyingPage;
 import tests.BaseTest;
 
 import java.io.IOException;
@@ -147,5 +148,11 @@ public class BookingSteps extends BaseTest {
         ticketTypePage.clickNextButton();
     }
 
-
+    @Then("I enter contact details {string} {string} {string}")
+    public void iEnterContactDetails(String email, String countryCode, String phoneNum) {
+        WhosFlyingPage whosFlyingPage = new WhosFlyingPage(driver);
+        whosFlyingPage.enterEmail(email);
+        whosFlyingPage.enterCountryCode(countryCode);
+        whosFlyingPage.enterPhoneNumber(phoneNum);
+    }
 }
