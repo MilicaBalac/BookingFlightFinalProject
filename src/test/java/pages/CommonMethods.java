@@ -109,8 +109,11 @@ public class CommonMethods {
         return element.getAttribute("value");
     }
 
-    protected boolean isElementPresent(List<WebElement> elements) {
+    public boolean isElementsPresent(List<WebElement> elements) {
         return elements.size() != 0;
+    }
+    public boolean isElementPresent(WebElement element) {
+        return element != null;
     }
     //Selenium wrapper methods End
 }

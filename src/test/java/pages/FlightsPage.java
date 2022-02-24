@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -56,6 +57,21 @@ public class FlightsPage extends BasePage {
     @FindBy(css = "[data-testid='searchresults_card']")
     List<WebElement> flightsCard;
 
+    @FindBy (css = "[data-testid='flight_card_bound_select_flight']")
+    List <WebElement> seeFlightBtn;
+
+    @FindBy(css ="[SheetContainer-module__content___1idtO]]")
+    WebElement detailsScreen;
+
+    @FindBy(xpath ="//div[@class='css-yyi517']//div[@data-test-id='flight_card_price_main_price']")
+    List <WebElement> expectedPrice;
+
+    @FindBy(xpath = "//div[@class='css-2zyr2k']//div[@data-test-id='flight_card_price_main_price']")
+    WebElement acctualPrice;
+
+    @FindBy(css = "[data-testid='flight_details_inner_modal_select_button']")
+    WebElement selectFlightBtn;
+
     public void openFlightPage() throws InterruptedException {
         clickElement(flights);
     }
@@ -105,7 +121,7 @@ public class FlightsPage extends BasePage {
 
     public void chooseStops(String stops) throws InterruptedException {
 
-        if (isElementPresent(flightsCard)) {
+        if (isElementsPresent(flightsCard)) {
             clickElement(driver.findElement(By.xpath("//div[text() ='" + stops + "']")));
         } else {
             checkDirectFlights();
@@ -115,7 +131,7 @@ public class FlightsPage extends BasePage {
     }
 
     public void chooseFlightTime(String time) throws InterruptedException {
-        if (isElementPresent(flightsCard)) {
+        if (isElementsPresent(flightsCard)) {
             clickElement(driver.findElement(By.xpath("//div[contains(text(), '"+time+"')]//..//..//span")));
         } else {
             checkDirectFlights();
@@ -124,4 +140,40 @@ public class FlightsPage extends BasePage {
         }
 
     }
+
+    public void choosePresentation(String presentation) throws InterruptedException {
+        if (isElementsPresent(flightsCard)) {
+            clickElement(driver.findElement(By.xpath("//span[text()='"+presentation+"']")));
+        } else {
+            checkDirectFlights();
+            Thread.sleep(2000);
+            clickElement(driver.findElement(By.xpath("//span[text()='"+presentation+"']")));
+        }
+    }
+
+    public void clickToSeeFlightDetails(String num) throws InterruptedException {
+        clickElement(seeFlightBtn.get(Integer.parseInt(num)));
+    }
+
+    public void verifyVisibilityOfDetails() {
+        Assert.assertTrue(isElementPresent(detailsScreen));
+    }
+
+    public void verifyPrices(String num) {
+
+       String expePrice = getText(expectedPrice.get(Integer.parseInt(num))).substring(1);
+       Double expPrice = Double.parseDouble(expePrice);
+
+       String acctPrice = getText(acctualPrice).substring(1);
+       Double accPrice = Double.parseDouble(acctPrice);
+
+       Assert.assertEquals(accPrice, expPrice);
+
+    }
+
+    public void selectFlight () throws InterruptedException {
+        clickElement(selectFlightBtn);
+    }
+
+
 }
