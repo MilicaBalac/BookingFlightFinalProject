@@ -164,11 +164,19 @@ public class FlightsPage extends BasePage {
        String expePrice = getText(expectedPrice.get(Integer.parseInt(num))).substring(1);
        Double expPrice = Double.parseDouble(expePrice);
 
-       String acctPrice = getText(acctualPrice).substring(1);
+       Double adultsNum = Double.parseDouble(getText(adultEl).substring(0,1));
+
+       Double expecPrice = expPrice * adultsNum;
+       double roundOff = Math.round(expecPrice*100.0)/100.0;
+
+       String acctPrice = getText(acctualPrice).substring(1).replace(",", "");
        Double accPrice = Double.parseDouble(acctPrice);
 
-       Assert.assertEquals(accPrice, expPrice);
-
+       if(roundOff == accPrice) {
+           Assert.assertEquals(accPrice, roundOff);
+       } else {
+           Assert.assertEquals(accPrice, expPrice);
+        }
     }
 
     public void selectFlight () throws InterruptedException {
