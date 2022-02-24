@@ -16,6 +16,12 @@ Feature: Booking
     Then I verify visibility of flights details
     Then I verify prices "2"
     Then I select flight
+    Then I choose type of tickets "Flexible ticket"
+    Then I verify final price "flexible"
+    Then I click next button
+
+
+
 
 
 #   Examples:

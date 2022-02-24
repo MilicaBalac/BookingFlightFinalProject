@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Reporter;
 import pages.FlightsPage;
+import pages.TicketTypePage;
 import tests.BaseTest;
 
 import java.io.IOException;
@@ -127,4 +128,24 @@ public class BookingSteps extends BaseTest {
         FlightsPage flightsPage = new FlightsPage(driver);
         flightsPage.selectFlight();
     }
+
+    @Then("I choose type of tickets {string}")
+    public void iChooseTypeOfTickets(String type) throws InterruptedException {
+        TicketTypePage ticketTypePage = new TicketTypePage(driver);
+        ticketTypePage.chooseTicketType(type);
+    }
+
+    @Then("I verify final price {string}")
+    public void iVerifyFinalPrice(String ticketType) {
+        TicketTypePage ticketTypePage = new TicketTypePage(driver);
+        ticketTypePage.verifyFinalPrice(ticketType);
+    }
+
+    @Then("I click next button")
+    public void iClickNextButton() throws InterruptedException {
+        TicketTypePage ticketTypePage = new TicketTypePage(driver);
+        ticketTypePage.clickNextButton();
+    }
+
+
 }
