@@ -54,7 +54,7 @@ public class FlightsPage extends BasePage {
     WebElement searchBtn;
 
     @FindBy(css = "[data-testid='searchresults_card']")
-    List <WebElement> flightsCard;
+    List<WebElement> flightsCard;
 
     public void openFlightPage() throws InterruptedException {
         clickElement(flights);
@@ -103,12 +103,25 @@ public class FlightsPage extends BasePage {
         Thread.sleep(3000);
     }
 
-    public void checkIfflightsExists() throws InterruptedException {
+    public void chooseStops(String stops) throws InterruptedException {
 
-        if(!isElementPresent(flightsCard)) {
+        if (isElementPresent(flightsCard)) {
+            clickElement(driver.findElement(By.xpath("//div[text() ='" + stops + "']")));
+        } else {
             checkDirectFlights();
+            Thread.sleep(2000);
+            clickElement(driver.findElement(By.xpath("//div[text() ='" + stops + "']")));
         }
     }
-  //  clickElement(driver.findElement(By.xpath("//div[text() ='" + stops + "']")));
 
+    public void chooseFlightTime(String time) throws InterruptedException {
+        if (isElementPresent(flightsCard)) {
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), '"+time+"')]//..//..//span")));
+        } else {
+            checkDirectFlights();
+            Thread.sleep(2000);
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), '"+time+"')]//..//..//span")));
+        }
+
+    }
 }

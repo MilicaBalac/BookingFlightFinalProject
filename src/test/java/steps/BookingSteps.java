@@ -89,10 +89,17 @@ public class BookingSteps extends BaseTest {
         flightsPage.clickSearch();
     }
 
-    @And("I check if flights exists")
-    public void iCheckIfFlightsExists() throws InterruptedException {
+    @Then("I choose stops and flight time {string} {string}")
+    public void iChooseStopsAndFlightTime(String stops, String time) throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.checkIfflightsExists();
-
+        flightsPage.chooseStops(stops);
+        flightsPage.chooseFlightTime(time);
     }
+
+//    @And("I check if flights exists")
+//    public void iCheckIfFlightsExists() throws InterruptedException {
+//        FlightsPage flightsPage = new FlightsPage(driver);
+//        flightsPage.checkIfflightsExists();
+//
+//    }
 }

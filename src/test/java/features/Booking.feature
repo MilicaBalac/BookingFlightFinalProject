@@ -10,7 +10,8 @@ Feature: Booking
     And I add departure date and return date "2022-02-27"  "2022-03-17"
     Then I check direct flights only
     And I click search
-    And I check if flights exists
+    Then I choose stops and flight time "1 stop max" "12:00 AM - 5:59 AM"
+
 
 #   Examples:
 #      | row |
