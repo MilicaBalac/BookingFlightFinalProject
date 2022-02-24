@@ -1,13 +1,12 @@
 package pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class CommonMethods {
 
@@ -46,13 +45,19 @@ public class CommonMethods {
         actions.moveToElement(element).build().perform();
     }
 
+    public void inputElement (WebElement element, String value)  {
+        element.clear();
+        element.click();
+        element.sendKeys(value);
+    }
+
     public void typeText(WebElement element, String text) throws InterruptedException {
         WebDriverWait wdWait = new WebDriverWait(driver, wait);
         wdWait.until(ExpectedConditions.visibilityOf(element));
         wdWait.until(ExpectedConditions.elementToBeClickable(element));
 
         try {
-            scrollToElement(element);
+        //    scrollToElement(element);
             Actions actions = new Actions(driver);
             actions.moveToElement(element).build().perform();
             element.sendKeys(text);
@@ -63,9 +68,9 @@ public class CommonMethods {
     }
 
     public void selectByValue(WebElement element, String value) {
-        WebDriverWait wdWait = new WebDriverWait(driver, wait);
-        wdWait.until(ExpectedConditions.visibilityOf(element));
-        wdWait.until(ExpectedConditions.elementToBeClickable(element));
+//        WebDriverWait wdWait = new WebDriverWait(driver, wait);
+//        wdWait.until(ExpectedConditions.visibilityOf(element));
+//        wdWait.until(ExpectedConditions.elementToBeClickable(element));
 
         try {
             Select select = new Select(element);
@@ -102,6 +107,10 @@ public class CommonMethods {
         wdWait.until(ExpectedConditions.visibilityOf(element));
 
         return element.getAttribute("value");
+    }
+
+    protected boolean isElementPresent(List<WebElement> elements) {
+        return elements.size() != 0;
     }
     //Selenium wrapper methods End
 }
