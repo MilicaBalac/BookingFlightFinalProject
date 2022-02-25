@@ -22,7 +22,9 @@ Feature: Booking
     Then I verify final price "flexible"
     Then I click next button
 
-    Then I enter contact details "milicabalac94@gmail.com" "GR" "647778889"
+    Then I enter contact details "RS"
+    Then I enter names of passengers and gender "3"
+    Then I click next
 
 
 
