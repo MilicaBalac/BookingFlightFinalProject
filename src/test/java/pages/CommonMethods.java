@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.Random;
 
 public class CommonMethods {
 
@@ -116,4 +117,50 @@ public class CommonMethods {
         return element != null;
     }
     //Selenium wrapper methods End
+
+    public String randomName(int lenght) {
+
+        String[] strings = {"q", "w", "r", "y", "g", "a", "c", "e", "v", "f", "c"};
+        String result = "";
+        for (int i =0; i<=lenght;i++){
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            result = result +strings[index];
+        }
+        return result;
+    }
+    public String randomPhone(int lenght) {
+
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+        String result = "";
+        for (int i =1; i<=lenght;i++){
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            result = result + strings[index];
+        }
+        return "62"+result;
+    }
+    public String randomEmail(int lenght) {
+
+        String[] strings = {"q", "w", "r", "y", "g"};
+        String result = "";
+        for (int i =0; i <= lenght;i++){
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            result = result +strings[index];
+        }
+        return result +"@gmail.com";
+    }
+
+    public void randomIndexFromDropDown(WebElement element) {
+        Select objSel = new Select(element);
+        List<WebElement> weblist = objSel.getOptions();
+        int iCnt = weblist.size();
+        Random num = new Random();
+        int iSelect = num.nextInt(iCnt);
+        while (iSelect == 0) {
+            iSelect = num.nextInt(iCnt);
+        }
+        objSel.selectByIndex(iSelect);
+    }
 }

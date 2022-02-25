@@ -2,6 +2,7 @@ Feature: Booking
 
 #  Scenario Outline: Book a Flight row: "<row>"
   Scenario: Book a Flight
+
     Given I navigate to Booking
     Then I navigate to flights page
     And I select flight class "BUSINESS"
@@ -16,9 +17,17 @@ Feature: Booking
     Then I verify visibility of flights details
     Then I verify prices "2"
     Then I select flight
+
     Then I choose type of tickets "Flexible ticket"
     Then I verify final price "flexible"
     Then I click next button
+
+    Then I enter contact details "RS"
+    Then I enter names of passengers and gender "3"
+    Then I click next
+
+
+
 
 
 
