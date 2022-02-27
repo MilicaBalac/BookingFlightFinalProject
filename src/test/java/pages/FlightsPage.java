@@ -21,6 +21,7 @@ public class FlightsPage extends BasePage {
     }
 
 
+
     @FindBy(xpath = "//a[@data-decider-header='flights']")
     WebElement flights;
 
@@ -76,11 +77,9 @@ public class FlightsPage extends BasePage {
         clickElement(flights);
     }
 
-
     public void selectFlightClass(String classType) {
         selectByValue(flightClass, classType);
     }
-
 
     public void addAdults(String num) throws InterruptedException {
         clickElement(adultEl);
@@ -130,13 +129,24 @@ public class FlightsPage extends BasePage {
         }
     }
 
-    public void chooseFlightTime(String time) throws InterruptedException {
+    public void chooseDepartFlightTime(String time) throws InterruptedException {
         if (isElementsPresent(flightsCard)) {
-            clickElement(driver.findElement(By.xpath("//div[contains(text(), '"+time+"')]//..//..//span")));
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), 'Departs')]//..//..//div[contains(text(),'"+time+"')]//..//..//span")));
         } else {
             checkDirectFlights();
             Thread.sleep(2000);
-            clickElement(driver.findElement(By.xpath("//div[contains(text(), '"+time+"')]//..//..//span")));
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), 'Departs')]//..//..//div[contains(text(),'"+time+"')]//..//..//span")));
+        }
+
+    }
+
+    public void chooseArrivesFlightTime(String time) throws InterruptedException {
+        if (isElementsPresent(flightsCard)) {
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), 'Arrives')]//..//..//div[contains(text(),'"+time+"')]//..//..//span")));
+        } else {
+            checkDirectFlights();
+            Thread.sleep(2000);
+            clickElement(driver.findElement(By.xpath("//div[contains(text(), 'Arrives')]//..//..//div[contains(text(),'"+time+"')]//..//..//span")));
         }
 
     }
@@ -161,7 +171,7 @@ public class FlightsPage extends BasePage {
 
     public void verifyPrices(String num) {
 
-       String expePrice = getText(expectedPrice.get(Integer.parseInt(num))).substring(1);
+       String expePrice = getText(expectedPrice.get(Integer.parseInt(num))).substring(1).replace(",", "");
        Double expPrice = Double.parseDouble(expePrice);
 
        Double adultsNum = Double.parseDouble(getText(adultEl).substring(0,1));
