@@ -8,6 +8,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Reporter;
 import pages.FlightsPage;
+import pages.SelectSeatPage;
 import pages.TicketTypePage;
 import pages.WhosFlyingPage;
 import tests.BaseTest;
@@ -92,10 +93,11 @@ public class BookingSteps extends BaseTest {
     }
 
     @Then("I choose stops and flight time {string} {string}")
-    public void iChooseStopsAndFlightTime(String stops, String time) throws InterruptedException {
+    public void iChooseStopsAndFlightTime(String stops, String deTime) throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
         flightsPage.chooseStops(stops);
-        flightsPage.chooseFlightTime(time);
+        flightsPage.chooseDepartFlightTime(deTime);
+
     }
 
     @Then("I choose presentation {string}")
@@ -133,19 +135,29 @@ public class BookingSteps extends BaseTest {
     @Then("I choose type of tickets {string}")
     public void iChooseTypeOfTickets(String type) throws InterruptedException {
         TicketTypePage ticketTypePage = new TicketTypePage(driver);
-        ticketTypePage.chooseTicketType(type);
+        boolean exist = ticketTypePage.checkIfPageExists();
+        if(exist) {
+            ticketTypePage.chooseTicketType(type);
+        }
     }
 
     @Then("I verify final price {string}")
     public void iVerifyFinalPrice(String ticketType) {
         TicketTypePage ticketTypePage = new TicketTypePage(driver);
-        ticketTypePage.verifyFinalPrice(ticketType);
+        boolean exist = ticketTypePage.checkIfPageExists();
+        if(exist) {
+            ticketTypePage.verifyFinalPrice(ticketType);
+        }
     }
 
     @Then("I click next button")
     public void iClickNextButton() throws InterruptedException {
+
         TicketTypePage ticketTypePage = new TicketTypePage(driver);
-        ticketTypePage.clickNextButton();
+        boolean exist = ticketTypePage.checkIfPageExists();
+        if(exist) {
+            ticketTypePage.clickNextButton();
+        }
     }
 
     @Then("I enter contact details {string}")
@@ -172,5 +184,18 @@ public class BookingSteps extends BaseTest {
     public void iClickNext() throws InterruptedException {
         WhosFlyingPage whosFlyingPage = new WhosFlyingPage(driver);
         whosFlyingPage.clickNext();
+    }
+
+    @Then("I select seats")
+    public void iSelectSeats() throws InterruptedException {
+
+        SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
+        selectSeatPage.selectSeat();
+    }
+
+    @Then("I click  last next button")
+    public void iClickLastNextButton() throws InterruptedException {
+        SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
+        selectSeatPage.clickNext();
     }
 }
