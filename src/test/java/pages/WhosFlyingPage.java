@@ -26,6 +26,9 @@ public class WhosFlyingPage extends BasePage {
     @FindBy(css = ".css-b07tw6")
     WebElement nextBtn;
 
+    @FindBy(css = ".css-k008qs")
+    WebElement destinationEl;
+
     String firstName = randomName(6);
     String lastName = randomName(6);
     String email = randomEmail(6);
@@ -34,9 +37,11 @@ public class WhosFlyingPage extends BasePage {
     public void enterEmail() {
         inputElement(emailEl, email);
     }
+
     public void enterCountryCode(String countryCode) {
         selectByValue(countryCodeEl, countryCode);
     }
+
     public void enterPhoneNumber() {
         inputElement(phoneEl, phoneNumber);
     }
@@ -49,7 +54,6 @@ public class WhosFlyingPage extends BasePage {
         inputElement(driver.findElement(By.cssSelector("[name='passengers."+numOfPassengers+".lastName']")), lastName);
     }
 
-
     public void chooseGender(int numOfPassengers) {
         randomIndexFromDropDown(driver.findElement(By.cssSelector("[name='passengers."+numOfPassengers+".gender']")));
     }
@@ -57,5 +61,9 @@ public class WhosFlyingPage extends BasePage {
     public void clickNext() throws InterruptedException {
         clickElement(nextBtn);
     }
+
+    public String destination = getText(destinationEl);
+
+
 
 }

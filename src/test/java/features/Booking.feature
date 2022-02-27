@@ -29,6 +29,9 @@ Feature: Booking
     Then I select seats
     Then I click  last next button
 
+    Then I verify flight destination
+
+
 
 
 
