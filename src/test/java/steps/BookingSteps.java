@@ -7,10 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Reporter;
-import pages.FlightsPage;
-import pages.SelectSeatPage;
-import pages.TicketTypePage;
-import pages.WhosFlyingPage;
+import pages.*;
 import tests.BaseTest;
 
 import java.io.IOException;
@@ -188,7 +185,6 @@ public class BookingSteps extends BaseTest {
 
     @Then("I select seats")
     public void iSelectSeats() throws InterruptedException {
-
         SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
         selectSeatPage.selectSeat();
     }
@@ -198,4 +194,11 @@ public class BookingSteps extends BaseTest {
         SelectSeatPage selectSeatPage = new SelectSeatPage(driver);
         selectSeatPage.clickNext();
     }
+
+    @Then("I verify flight destination")
+    public void iVerifyFlightDestination() {
+        CheckAndPayPage checkAndPayPage = new CheckAndPayPage(driver);
+        checkAndPayPage.verifyDestination();
+    }
+
 }
