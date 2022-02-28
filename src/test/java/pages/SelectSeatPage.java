@@ -36,7 +36,11 @@ public class SelectSeatPage extends BasePage{
 			clickElement(viewSeatsEl.get(i));
 			for (int j = 0; j < passengers.size(); j++) {
 				Thread.sleep(2000);
+				if(allSeats.size() > passengers.size())
 				clickElement(allSeats.get(j+1));
+				else{
+					clickElement(allSeats.get(j-1));
+				}
 			}
 		}
 	}
