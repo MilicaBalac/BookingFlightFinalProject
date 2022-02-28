@@ -13,7 +13,7 @@ Feature: Booking
     And I click search
     Then I choose stops and flight time "1 stop max" "12:00 AM - 5:59 AM"
     Then I choose presentation "Cheapest"
-    Then I click to see flight "1"
+    Then I click to see flight "2"
     Then I verify visibility of flights details
     Then I verify prices "2"
     Then I select flight
@@ -30,18 +30,6 @@ Feature: Booking
     Then I click  last next button
 
     Then I verify flight destination
-
-
-
-
-
-
-
-
-
-
-
-
 
 #   Examples:
 #      | row |
