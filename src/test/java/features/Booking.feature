@@ -1,7 +1,7 @@
 Feature: Booking
 
   Scenario Outline: Book a Flight row: "<row>"
-#  Scenario: Book a Flight
+
     Given I load test data from "BookingFlight" "BookingSheet" "<row>"
     Given I navigate to Booking
     Then I navigate to flights page
@@ -37,7 +37,7 @@ Feature: Booking
     Examples:
       | row |
       | 1   |
-#      | 2   |
+      | 2   |
 
 
 

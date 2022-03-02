@@ -144,6 +144,31 @@ public class CommonMethods  {
         }
         return "62"+result;
     }
+
+    public String randomMonthAndDay(int lenght) {
+
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11","12"};
+        String result = "";
+        for (int i =1; i<=lenght;i++){
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            result = result + strings[index];
+        }
+        return result;
+    }
+
+    public String randomYear(int lenght) {
+
+        String[] strings = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        String result = "";
+        for (int i =1; i<=lenght;i++){
+            Random random = new Random();
+            int index = random.nextInt(strings.length);
+            result = result + strings[index];
+        }
+        return "19" + result;
+    }
+
     public String randomEmail(int lenght) {
 
         String[] strings = {"q", "w", "r", "y", "g"};
