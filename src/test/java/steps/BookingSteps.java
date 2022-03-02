@@ -32,15 +32,14 @@ public class BookingSteps extends BaseTest {
     @After
     public void tearDown() throws IOException {
         reportScreenshot("end", "Screenshot on end or fail");
-        quit();
+     //   quit();
     }
 
-//    @Given("I load test data from {string} {string} {string}")
-//    public void iLoadTestDataFrom(String fileName, String sheetName, String rowNum) throws IOException {
-//        ExcelUtilities excelUtilities = new ExcelUtilities();
-//        data = excelUtilities.getRowData(testDataPath + fileName + ".xlsx", sheetName, rowNum);
-//        System.out.println(data.get("Location"));
-//    }
+    @Given("I load test data from {string} {string} {string}")
+    public void iLoadTestDataFrom(String fileName, String sheetName, String rowNum) throws IOException {
+        ExcelUtilities excelUtilities = new ExcelUtilities();
+        data = excelUtilities.getRowData(testDataPath + fileName + ".xlsx", sheetName, rowNum);
+    }
 
     @Given("I navigate to Booking")
     public void iNavigateToBooking() throws Exception {
@@ -53,28 +52,28 @@ public class BookingSteps extends BaseTest {
         flightsPage.openFlightPage();
     }
 
-    @And("I select flight class {string}")
-    public void iSelectFlightClass(String classType) {
+    @And("I select flight class")
+    public void iSelectFlightClass() {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.selectFlightClass(classType);
+        flightsPage.selectFlightClass(data.get("ClassType"));
     }
 
-    @And("I select number of adults {string}")
-    public void iSelectNumberOfAdults(String num) throws InterruptedException {
+    @And("I select number of adults")
+    public void iSelectNumberOfAdults() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.addAdults(num);
+        flightsPage.addAdults(data.get("AdultsNum"));
     }
 
-    @And("I add destination {string} {string}")
-    public void iAddDestination(String city, String place) throws InterruptedException {
+    @And("I add destination")
+    public void iAddDestination() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.addLocation(city, place);
+        flightsPage.addLocation(data.get("City"), data.get("State"));
     }
 
-    @And("I add departure date and return date {string}  {string}")
-    public void iAddDepartureDateAndReturnDate(String departDate, String returnDate) throws InterruptedException {
+    @And("I add departure date and return date")
+    public void iAddDepartureDateAndReturnDate() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.selectDepartAndReturnDate(departDate, returnDate);
+        flightsPage.selectDepartAndReturnDate(data.get("departureDate"), data.get("returnDate"));
     }
 
     @Then("I check direct flights only")
@@ -89,24 +88,24 @@ public class BookingSteps extends BaseTest {
         flightsPage.clickSearch();
     }
 
-    @Then("I choose stops and flight time {string} {string}")
-    public void iChooseStopsAndFlightTime(String stops, String deTime) throws InterruptedException {
+    @Then("I choose stops and flight time")
+    public void iChooseStopsAndFlightTime() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.chooseStops(stops);
-        flightsPage.chooseDepartFlightTime(deTime);
+        flightsPage.chooseStops(data.get("stops"));
+        flightsPage.chooseDepartFlightTime(data.get("flightTime"));
 
     }
 
-    @Then("I choose presentation {string}")
-    public void iChoosePresentation(String presentation) throws InterruptedException {
+    @Then("I choose presentation")
+    public void iChoosePresentation() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.choosePresentation(presentation);
+        flightsPage.choosePresentation(data.get("presentation"));
     }
 
-    @Then("I click to see flight {string}")
-    public void iClickToSeeFlight(String num) throws InterruptedException {
+    @Then("I click to see flight")
+    public void iClickToSeeFlight() throws InterruptedException {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.clickToSeeFlightDetails(num);
+        flightsPage.clickToSeeFlightDetails(data.get("flightNum"));
     }
 
 
@@ -116,10 +115,10 @@ public class BookingSteps extends BaseTest {
         flightsPage.verifyVisibilityOfDetails();
     }
 
-    @Then("I verify prices {string}")
-    public void iVerifyPrices(String num) {
+    @Then("I verify prices")
+    public void iVerifyPrices() {
         FlightsPage flightsPage = new FlightsPage(driver);
-        flightsPage.verifyPrices(num);
+        flightsPage.verifyPrices(data.get("flightNum"));
 
     }
 
@@ -129,21 +128,21 @@ public class BookingSteps extends BaseTest {
         flightsPage.selectFlight();
     }
 
-    @Then("I choose type of tickets {string}")
-    public void iChooseTypeOfTickets(String type) throws InterruptedException {
+    @Then("I choose type of tickets")
+    public void iChooseTypeOfTickets() throws InterruptedException {
         TicketTypePage ticketTypePage = new TicketTypePage(driver);
         boolean exist = ticketTypePage.checkIfPageExists();
         if(exist) {
-            ticketTypePage.chooseTicketType(type);
+            ticketTypePage.chooseTicketType(data.get("ticketType"));
         }
     }
 
-    @Then("I verify final price {string}")
-    public void iVerifyFinalPrice(String ticketType) {
+    @Then("I verify final price")
+    public void iVerifyFinalPrice() {
         TicketTypePage ticketTypePage = new TicketTypePage(driver);
         boolean exist = ticketTypePage.checkIfPageExists();
         if(exist) {
-            ticketTypePage.verifyFinalPrice(ticketType);
+            ticketTypePage.verifyFinalPrice(data.get("priceTicketType"));
         }
     }
 
@@ -157,17 +156,17 @@ public class BookingSteps extends BaseTest {
         }
     }
 
-    @Then("I enter contact details {string}")
-    public void iEnterContactDetails(String countryCode) {
+    @Then("I enter contact details")
+    public void iEnterContactDetails() {
         WhosFlyingPage whosFlyingPage = new WhosFlyingPage(driver);
         whosFlyingPage.enterEmail();
-        whosFlyingPage.enterCountryCode(countryCode);
+        whosFlyingPage.enterCountryCode(data.get("countryCode"));
         whosFlyingPage.enterPhoneNumber();
     }
 
-    @Then("I enter names of passengers and gender {string}")
-    public void iEnterNamesOfPassengersAndGender(String numOfAdults) {
-        int num = Integer.parseInt(numOfAdults);
+    @Then("I enter names of passengers and gender")
+    public void iEnterNamesOfPassengersAndGender() {
+        int num = Integer.parseInt(data.get("AdultsNum"));
         WhosFlyingPage whosFlyingPage = new WhosFlyingPage(driver);
 
         for (int i =0; i < num; i++){
@@ -201,4 +200,23 @@ public class BookingSteps extends BaseTest {
         checkAndPayPage.verifyDestination();
     }
 
+
+    @Then("I choose meal")
+    public void iChooseMeal() {
+        BaggageAndExtras baggageAndExtras = new BaggageAndExtras(driver);
+        boolean exist = baggageAndExtras.checkIfPageExists();
+        if(exist) {
+            baggageAndExtras.chooseMeal(data.get("AdultsNum"));
+        }
+    }
+
+
+    @Then("I click next page")
+    public void iClickNextPage() throws InterruptedException {
+        BaggageAndExtras baggageAndExtras = new BaggageAndExtras(driver);
+        boolean exist = baggageAndExtras.checkIfPageExists();
+        if(exist) {
+            baggageAndExtras.clickNext();
+        }
+    }
 }
