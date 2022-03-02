@@ -174,14 +174,18 @@ public class FlightsPage extends BasePage {
        String expePrice = getText(expectedPrice.get(Integer.parseInt(num))).substring(1).replace(",", "");
        Double expPrice = Double.parseDouble(expePrice);
 
+        System.out.println("Ocekivana cena sa osnovne strane: " +expPrice);
        Double adultsNum = Double.parseDouble(getText(adultEl).substring(0,1));
-
+        System.out.println("Broj putnika " + adultsNum);
        Double expecPrice = expPrice * adultsNum;
+        System.out.println("Ocekivana cena pomnozena sa rojem putnikad: " + expePrice);
        double roundOff = Math.round(expecPrice*100.0)/100.0;
+        System.out.println("Zaokruzena ocekivana cena " + roundOff);
 
        String acctPrice = getText(acctualPrice).substring(1).replace(",", "");
        Double accPrice = Double.parseDouble(acctPrice);
 
+        System.out.println("Prava cena: " + acctPrice);
        if(roundOff == accPrice) {
            Assert.assertEquals(accPrice, roundOff);
        } else {
