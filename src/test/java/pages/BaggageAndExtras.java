@@ -24,16 +24,26 @@ public class BaggageAndExtras extends BasePage{
 	@FindBy(xpath = "//div[contains(text(), 'Luggage')]")
 	List<WebElement> luggagePage;
 
-	public boolean checkIfPageExists () {
+	@FindBy(xpath = "//div[contains(text(), 'Checked bags')]")
+	List<WebElement> bagsPart;
+
+	public boolean checkIfLuggageExists () {
 		return isElementsPresent(luggagePage);
 	}
-
-	public void chooseMeal(String passengersNum) {
-		for (int i = 0; i < Integer.parseInt(passengersNum); i++) {
-			randomIndexFromDropDown(driver.findElements(By.cssSelector(".InputSelect-module__field___10SP5")).get(i));
-		}
+	public boolean checkIfBagsExists () {
+		return isElementsPresent(bagsPart);
 	}
 
+	public void chooseMeal(String passengersNum) throws InterruptedException {
+
+		if (checkIfBagsExists()) {
+		clickNext();
+		} else {
+			for (int i = 0; i < Integer.parseInt(passengersNum); i++) {
+				randomIndexFromDropDown(driver.findElements(By.cssSelector(".InputSelect-module__field___10SP5")).get(i));
+			}
+		}
+	}
 	public void clickNext() throws InterruptedException {
 		clickElement(nextBtn);
 	}

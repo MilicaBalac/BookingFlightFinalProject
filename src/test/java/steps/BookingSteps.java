@@ -32,7 +32,7 @@ public class BookingSteps extends BaseTest {
     @After
     public void tearDown() throws IOException {
         reportScreenshot("end", "Screenshot on end or fail");
-     //   quit();
+      //  quit();
     }
 
     @Given("I load test data from {string} {string} {string}")
@@ -173,6 +173,11 @@ public class BookingSteps extends BaseTest {
             whosFlyingPage.enterFirstName(i);
             whosFlyingPage.enterLastName(i);
             whosFlyingPage.chooseGender(i);
+          if(whosFlyingPage.checkIfPageExists()) {
+              whosFlyingPage.enterMonth(i);
+              whosFlyingPage.enterDay(i);
+              whosFlyingPage.enterYear(i);
+          }
         }
     }
 
@@ -202,9 +207,9 @@ public class BookingSteps extends BaseTest {
 
 
     @Then("I choose meal")
-    public void iChooseMeal() {
+    public void iChooseMeal() throws InterruptedException {
         BaggageAndExtras baggageAndExtras = new BaggageAndExtras(driver);
-        boolean exist = baggageAndExtras.checkIfPageExists();
+        boolean exist = baggageAndExtras.checkIfLuggageExists();
         if(exist) {
             baggageAndExtras.chooseMeal(data.get("AdultsNum"));
         }
@@ -214,7 +219,7 @@ public class BookingSteps extends BaseTest {
     @Then("I click next page")
     public void iClickNextPage() throws InterruptedException {
         BaggageAndExtras baggageAndExtras = new BaggageAndExtras(driver);
-        boolean exist = baggageAndExtras.checkIfPageExists();
+        boolean exist = baggageAndExtras.checkIfLuggageExists();
         if(exist) {
             baggageAndExtras.clickNext();
         }
