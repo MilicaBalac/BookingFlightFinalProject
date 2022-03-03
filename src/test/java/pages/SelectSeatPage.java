@@ -23,7 +23,7 @@ public class SelectSeatPage extends BasePage{
 	@FindBy(xpath = "//button[@aria-expanded='true']//..//div[@class = 'css-suxfu6']")
 	List<WebElement> passengers;
 
-	@FindBy(xpath = "//button[@aria-expanded='true']//..//div[@class='Accordion-module__content___2xGZy']//div[@class='css-dcom7u']")
+	@FindBy(xpath = "//button[@aria-expanded='true']//..//div[contains(@style, 'grid-column: COLUMN')]//div[@class='css-dcom7u' or @class='css-1koab2d']")
 	List<WebElement> allSeats;
 
 	@FindBy(css = ".css-b07tw6")

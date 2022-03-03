@@ -46,7 +46,7 @@ public class FlightsPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='Depart']")
     WebElement departBtn;
 
-    @FindBy(xpath = "//input[@placeholder='Return']")
+    @FindBy(css = "[placeholder='Return']")
     WebElement returnBtn;
 
     @FindBy(css = ".InputCheckbox-module__field___1mRcZ")
@@ -105,7 +105,7 @@ public class FlightsPage extends BasePage {
     public void selectDepartAndReturnDate(String departDate, String returnDate) throws InterruptedException {
         clickElement(departBtn);
         clickElement(driver.findElement(By.xpath("//span[@data-date-cell='" + departDate + "']")));
-        clickElement(returnBtn);
+       // clickElement(returnBtn);
         clickElement(driver.findElement(By.xpath("//span[@data-date-cell='" + returnDate + "']")));
     }
 

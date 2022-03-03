@@ -38,6 +38,7 @@ Feature: Booking
       | row |
       | 1   |
       | 2   |
+      | 3   |
 
 
 

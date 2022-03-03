@@ -10,9 +10,10 @@ import org.testng.annotations.Test;
         plugin = {"io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm"}
 )
 public class TestNGCucumberRunner extends AbstractTestNGCucumberTests {
-    @DataProvider(parallel = true)
+    @DataProvider
     @Override
     public Object[][] scenarios() {
         return super.scenarios();
     }
 }
+//(parallel = true)
